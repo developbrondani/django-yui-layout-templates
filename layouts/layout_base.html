@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>{% block title %}{% endblock title %}</title>
+    {% block css %}
+        <link rel="stylesheet" href="/media/main/css/yahoo/reset-fonts-grids.css" type="text/css" charset="utf-8" /> 
+        <link rel="stylesheet" href="/media/main/css/yahoo/base-min.css" type="text/css" charset="utf-8" /> 
+        <link rel="stylesheet" href="/media/main/css/stylesheet.css" type="text/css" media="screen" charset="utf-8" />
+    {% endblock css %}  
+    {% block js %}
+        <!--[if IE]>
+        <style type="text/css">
+            body { width:expression( documentElement.clientWidth < 769 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 769 ? "768" : "auto") : "768px") : "auto"); }
+        </style>
+        <![endif]-->
+        <!--[if lt IE 7.]>
+            <script defer type="text/javascript" src="/media/main/js/pngfix.js"></script>
+        <![endif]-->
+    {% endblock js %}  
+</head>
+<body{% block bodyonload %}{% endblock bodyonload %}>
+    <div {% block yahooui %}{% endblock yahooui %}>
+        <!-- BEGIN header -->
+        <div id="hd" class="clearfix">
+            {% block header %}
+                {% spaceless %} 
+                    {% include 'shared/header.html' %}
+                {% endspaceless %}
+            {% endblock header %}
+        </div>
+        <!-- END header -->
+        
+        <!-- BEGIN body -->
+        <div id="bd" class="clearfix">
+            {% block body %}
+            {% endblock body %}
+        </div>
+        <!-- END body -->
+            
+        <!-- BEGIN footer -->
+        <div id="ft" class="clearfix">
+            {% block footer %}
+                {% spaceless %}
+                    {% include 'shared/footer.html' %}
+                {% endspaceless %}
+            {% endblock footer %}
+        </div>
+        <!-- END footer -->
+        
+        <!--  BEGIN debug -->
+        {% spaceless %}
+        {% if debug %}
+        <div id="debug">
+            <h2>Queries</h2>
+            <p>{{ sql_queries|length }} Queries {% ifnotequal sql_queries|length 0 %} (<span style="cursor: pointer;" onclick="document.getElementById('debugQueryTable').style.display='';">Show</span>) {% endifnotequal %}</p>
+            <table id="debugQueryTable" style="display: none;">
+                <col width="1"></col>
+                <col></col>
+                <col width="1"></col>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">SQL</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for query in sql_queries %}<tr class="{% cycle odd,even %}">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ query.sql|escape }}</td>
+                    <td>{{ query.time }}</td>
+                    </tr>{% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+        {% endspaceless %}
+        <!--  END debug -->
+    </div>
+</body>
+</html>
