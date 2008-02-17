@@ -1,51 +1,42 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% block doctype %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">{% endblock doctype %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+{% block head %}
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    {% block meta %}<meta http-equiv="content-type" content="text/html;charset=UTF-8" />{% endblock meta %}
     <title>{% block title %}{% endblock title %}</title>
-    {% block css %}
-        <link rel="stylesheet" href="/media/main/css/yahoo/reset-fonts-grids.css" type="text/css" charset="utf-8" /> 
-        <link rel="stylesheet" href="/media/main/css/yahoo/base-min.css" type="text/css" charset="utf-8" /> 
-        <link rel="stylesheet" href="/media/main/css/stylesheet.css" type="text/css" media="screen" charset="utf-8" />
-    {% endblock css %}  
+    {% block css %}<link rel="stylesheet" href="/media/main/css/yahoo/reset-fonts-grids.css" type="text/css" charset="utf-8" /> 
+    <link rel="stylesheet" href="/media/main/css/yahoo/base-min.css" type="text/css" charset="utf-8" /> 
+    <link rel="stylesheet" href="/media/main/css/stylesheet.css" type="text/css" media="screen" charset="utf-8" />{% endblock css %}  
     {% block js %}
-        <!--[if IE]>
-        <style type="text/css">
-            body { width:expression( documentElement.clientWidth < 769 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 769 ? "768" : "auto") : "768px") : "auto"); }
-        </style>
-        <![endif]-->
-        <!--[if lt IE 7.]>
-            <script defer type="text/javascript" src="/media/main/js/pngfix.js"></script>
-        <![endif]-->
+    <!--[if IE]>
+    <style type="text/css">
+        body { width:expression( documentElement.clientWidth < 769 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 769 ? "768" : "auto") : "768px") : "auto"); }
+    </style>
+    <![endif]-->
+    <!--[if lt IE 7.]>
+        <script defer type="text/javascript" src="/media/main/js/pngfix.js"></script>
+    <![endif]-->
     {% endblock js %}  
 </head>
+{% endblock head %}
+
 <body{% block bodyonload %}{% endblock bodyonload %}>
     <div {% block yahooui %}{% endblock yahooui %}>
         <!-- BEGIN header -->
         <div id="hd" class="clearfix">
-            {% block header %}
-                {% spaceless %} 
-                    {% include 'shared/header.html' %}
-                {% endspaceless %}
-            {% endblock header %}
+            {% block header %}{% spaceless %}{% include 'shared/header.html' %}{% endspaceless %}{% endblock header %}
         </div>
         <!-- END header -->
         
         <!-- BEGIN body -->
         <div id="bd" class="clearfix">
-            {% block body %}
-            {% endblock body %}
+            {% block body %}{% endblock body %}
         </div>
         <!-- END body -->
             
         <!-- BEGIN footer -->
         <div id="ft" class="clearfix">
-            {% block footer %}
-                {% spaceless %}
-                    {% include 'shared/footer.html' %}
-                {% endspaceless %}
-            {% endblock footer %}
+            {% block footer %}{% spaceless %}{% include 'shared/footer.html' %}{% endspaceless %}{% endblock footer %}
         </div>
         <!-- END footer -->
         
