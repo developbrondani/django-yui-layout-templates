@@ -1,49 +1,59 @@
+{% if debug %}
+
 {% block doctype %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">{% endblock doctype %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 {% block head %}
 <head>
-    {% block meta %}<meta http-equiv="content-type" content="text/html;charset=UTF-8" />{% endblock meta %}
+	{% block meta %}
+    {% block meta.content-type %}<meta http-equiv="content-type" content="text/html;charset=UTF-8" />{% endblock meta.content-type %}
+	{% block meta.description %}<meta http-equiv="description" content="" />{% endblock meta.description %}
+	{% block meta.keywords %}<meta http-equiv="keywords" content="" />{% endblock meta.keywords %}
+	{% endblock meta %}
+	
     <title>{% block title %}{% endblock title %}</title>
-    {% block css %}<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/reset-fonts-grids/reset-fonts-grids.css">
+	
+	{% block css %}
+	{% block css.shared %}<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/reset-fonts-grids/reset-fonts-grids.css">
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/base/base-min.css">
-	<link rel="stylesheet" href="/main/css/stylesheet.css" type="text/css" media="screen" charset="utf-8" />{% endblock css %}  
-    {% block js %}
-    <!--[if IE]>
-    <style type="text/css">
-        body { width:expression( documentElement.clientWidth < 769 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 769 ? "768" : "auto") : "768px") : "auto"); }
-    </style>
-    <![endif]-->
-    <!--[if lt IE 7.]>
-        <script defer type="text/javascript" src="/media/main/js/pngfix.js"></script>
-    <![endif]-->
-    {% endblock js %}  
+	<link rel="stylesheet" href="/media/css/stylesheet.css" type="text/css" media="screen" charset="utf-8" />{% endblock css.shared %}
+	{% block css.custom %}{% endblock css.custom %}
+	{% endblock css%}
+	
+	{% block js %}
+	{% block js.shared %}{% endblock js.shared %}
+	{% block js.custom %}{% endblock js.custom %}
+	{% endblock js%}
 </head>
 {% endblock head %}
 
 <body{% block bodyonload %}{% endblock bodyonload %}>
     <div {% block yahooui %}{% endblock yahooui %}>
-        <!-- BEGIN header -->
-        <div id="hd" class="clearfix">
-            {% block header %}{% spaceless %}{% include 'shared/header.html' %}{% endspaceless %}{% endblock header %}
+		{% block header %}
+		<!-- BEGIN header -->
+        <div id="hd">
+            {% block header_content %}{% include 'shared/header.html' %}{% endblock header_content %}
         </div>
         <!-- END header -->
-        
+		{% endblock header %}
+		
+		{% block body %}
         <!-- BEGIN body -->
-        <div id="bd" class="clearfix">
-            {% block body %}{% endblock body %}
+        <div id="bd">
+            {% block body_content %}{% endblock body_content %}
         </div>
         <!-- END body -->
-            
-        <!-- BEGIN footer -->
-        <div id="ft" class="clearfix">
-            {% block footer %}{% spaceless %}{% include 'shared/footer.html' %}{% endspaceless %}{% endblock footer %}
+		{% endblock body %}
+		
+		{% block footer %}
+		<!-- BEGIN footer -->
+        <div id="ft">
+            {% block footer_content %}{% include 'shared/footer.html' %}{% endblock footer_content %}
         </div>
         <!-- END footer -->
-        
+		{% endblock footer %}
+		
 		{% block sql_debug %}
         <!--  BEGIN debug -->
-        {% spaceless %}
-        {% if debug %}
         <div id="debug">
             <h2>Queries</h2>
             <p>{{ sql_queries|length }} Queries {% ifnotequal sql_queries|length 0 %} (<span style="cursor: pointer;" onclick="document.getElementById('debugQueryTable').style.display='';">Show</span>) {% endifnotequal %}</p>
@@ -67,10 +77,68 @@
                 </tbody>
             </table>
         </div>
-        {% endif %}
-        {% endspaceless %}
         <!--  END debug -->
 		{% endblock sql_debug %}
     </div>
 </body>
 </html>
+
+{% else %}
+
+{% block doctype %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">{% endblock doctype %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+{% spaceless %}
+{% block head %}
+<head>
+	{% block meta %}
+    <meta http-equiv="content-type" content="{% block meta.content-type %}text/html;charset=UTF-8{% endblock meta.content-type %}" />
+	<meta name="description" content="{% block meta.description %}{% endblock meta.description %}" />
+	<meta name="keywords" content="{% block meta.keywords %}{% endblock meta.keywords %}" />
+	{% endblock meta %}
+	
+    <title>{% block title %}{% endblock title %}</title>
+	
+	{% block css %}
+	{% block css.shared %}<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/reset-fonts-grids/reset-fonts-grids.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/base/base-min.css">
+	<link rel="stylesheet" href="/media/css/stylesheet.css" type="text/css" media="screen" charset="utf-8" />{% endblock css.shared %}
+	{% block css.custom %}{% endblock css.custom %}
+	{% endblock css%}
+	
+	{% block js %}
+	{% block js.shared %}{% endblock js.shared %}
+	{% block js.custom %}{% endblock js.custom %}
+	{% endblock js%}
+</head>
+{% endblock head %}
+
+<body{% block bodyonload %}{% endblock bodyonload %}>
+    <div {% block yahooui %}{% endblock yahooui %}>
+		{% block header %}
+		<!-- BEGIN header -->
+        <div id="hd">
+            {% block header_content %}{% include 'shared/header.html' %}{% endblock header_content %}
+        </div>
+        <!-- END header -->
+		{% endblock header %}
+		
+		{% block body %}
+        <!-- BEGIN body -->
+        <div id="bd">
+            {% block body_content %}{% endblock body_content %}
+        </div>
+        <!-- END body -->
+		{% endblock body %}
+		
+		{% block footer %}
+		<!-- BEGIN footer -->
+        <div id="ft">
+            {% block footer_content %}{% include 'shared/footer.html' %}{% endblock footer_content %}
+        </div>
+        <!-- END footer -->
+		{% endblock footer %}
+    </div>
+</body>
+{% endspaceless %}
+</html>
+{% endif %}
