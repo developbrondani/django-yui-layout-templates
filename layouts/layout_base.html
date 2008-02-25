@@ -5,17 +5,18 @@
 {% block head %}
 <head>
 	{% block meta %}
-    {% block meta.content-type %}<meta http-equiv="content-type" content="text/html;charset=UTF-8" />{% endblock meta.content-type %}
-	{% block meta.description %}<meta http-equiv="description" content="" />{% endblock meta.description %}
-	{% block meta.keywords %}<meta http-equiv="keywords" content="" />{% endblock meta.keywords %}
+    <meta http-equiv="content-type" content="{% block meta.content-type %}text/html;charset=UTF-8{% endblock meta.content-type %}" />
+	<meta name="description" content="{% block meta.description %}{% endblock meta.description %}" />
+	<meta name="keywords" content="{% block meta.keywords %}{% endblock meta.keywords %}" />
 	{% endblock meta %}
 	
     <title>{% block title %}{% endblock title %}</title>
 	
 	{% block css %}
-	{% block css.shared %}<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/reset-fonts-grids/reset-fonts-grids.css">
+	{% block css.shared %}
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/reset-fonts-grids/reset-fonts-grids.css">
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/base/base-min.css">
-	<link rel="stylesheet" href="/media/css/stylesheet.css" type="text/css" media="screen" charset="utf-8" />{% endblock css.shared %}
+	{% endblock css.shared %}
 	{% block css.custom %}{% endblock css.custom %}
 	{% endblock css%}
 	
@@ -99,9 +100,10 @@
     <title>{% block title %}{% endblock title %}</title>
 	
 	{% block css %}
-	{% block css.shared %}<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/reset-fonts-grids/reset-fonts-grids.css">
+	{% block css.shared %}
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/reset-fonts-grids/reset-fonts-grids.css">
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.4.1/build/base/base-min.css">
-	<link rel="stylesheet" href="/media/css/stylesheet.css" type="text/css" media="screen" charset="utf-8" />{% endblock css.shared %}
+	{% endblock css.shared %}
 	{% block css.custom %}{% endblock css.custom %}
 	{% endblock css%}
 	
