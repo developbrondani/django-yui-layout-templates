@@ -31,7 +31,7 @@
 		{% block header %}
 		<!-- BEGIN header -->
         <div id="hd">
-            {% block header_content %}{% include 'shared/header.html' %}{% endblock header_content %}
+            {% block header_content %}{% include 'templates/shared/header.html' %}{% endblock header_content %}
         </div>
         <!-- END header -->
 		{% endblock header %}
@@ -47,40 +47,10 @@
 		{% block footer %}
 		<!-- BEGIN footer -->
         <div id="ft">
-            {% block footer_content %}{% include 'shared/footer.html' %}{% endblock footer_content %}
+            {% block footer_content %}{% include 'templates/shared/footer.html' %}{% endblock footer_content %}
         </div>
         <!-- END footer -->
 		{% endblock footer %}
-		
-		{% block sql_debug %}
-		{% if debug %}
-        <!--  BEGIN debug -->
-        <div id="debug">
-            <h2>Queries</h2>
-            <p>{{ sql_queries|length }} Queries {% ifnotequal sql_queries|length 0 %} (<span style="cursor: pointer;" onclick="document.getElementById('debugQueryTable').style.display='';">Show</span>) {% endifnotequal %}</p>
-            <table id="debugQueryTable" style="display: none;">
-                <col width="1"></col>
-                <col></col>
-                <col width="1"></col>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">SQL</th>
-                        <th scope="col">Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for query in sql_queries %}<tr class="{% cycle odd,even %}">
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ query.sql|escape }}</td>
-                    <td>{{ query.time }}</td>
-                    </tr>{% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <!--  END debug -->
-		{% endif %}
-		{% endblock sql_debug %}
     </div>
 </body>
 </html>
